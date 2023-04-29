@@ -80,7 +80,7 @@
                         }
                     }
 
-                    if (match) {
+                    if (match && possiblewords.length < 5000) {
                         possiblewords += word 
                     }
                 }
