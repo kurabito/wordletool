@@ -1,25 +1,28 @@
 <template>
-    <h2>Wordle Tool</h2>
-    <div id="abvogfg">
-      <p>
-        <input type="text" id="l1" v-model="l1">
-        <input type="text" id="l2" v-model="l2">
-        <input type="text" id="l3" v-model="l3">
-        <input type="text" id="l4" v-model="l4">
-        <input type="text" id="l5" v-model="l5">
-        <label for="include">
-          Include
-        </label>
-        <input type="text" id="include" v-model="include">
-        <label for="exclude">
-          Exclude
-        </label>
-        <input type="text" id="exclude" v-model="exclude">
-      </p>
-      <p>
-        Possible words: {{ words }}
-      </p>
-    </div>
+  <h2>Wordle Tool</h2>
+  <div>
+    <p>
+      <input type="text" id="l1" v-model="l1" maxlength="1" class="letter">
+      <input type="text" id="l2" v-model="l2" maxlength="1" class="letter">
+      <input type="text" id="l3" v-model="l3" maxlength="1" class="letter">
+      <input type="text" id="l4" v-model="l4" maxlength="1" class="letter">
+      <input type="text" id="l5" v-model="l5" maxlength="1" class="letter">
+    </p>
+    <p>
+      <label for="include">
+        Include
+      </label>
+      <input type="text" id="include" v-model="include">
+    </p>
+    <p><label for="exclude">
+        Exclude
+      </label>
+      <input type="text" id="exclude" v-model="exclude">
+    </p>
+    <p>
+      Possible words: {{ words }}
+    </p>
+  </div>
   </template>
   
   <script>
@@ -36,11 +39,6 @@
         l5: "",
         include: "",
         exclude: "",
-        // wordarray: []
-        // wordlist
-        // position: [null, null, null, null, null],
-        // included: null,
-        // excluded: null
       }
     },
     computed: {
@@ -92,7 +90,7 @@
     // }                
                 // }
 
-                return (new Date() + possiblewords);
+                return (possiblewords);
 
                 // return (this.wordarray[1]);
       }
@@ -101,3 +99,13 @@
 
   }
   </script>
+
+<style scoped>
+.letter {
+  width: 20px;
+}
+label {
+  display: inline-block;
+  width: 60px;
+}
+</style>
