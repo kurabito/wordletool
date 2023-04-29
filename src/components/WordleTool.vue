@@ -23,12 +23,12 @@
       Possible words: {{ words }}
     </p>
   </div>
-  </template>
+</template>
   
-  <script>
+<script>
   import wordlist from '/src/assets/wordlist.txt?raw';
   export default {
-    name: 'ABVfromOGandFG',
+    name: 'WordleTool',
     data() {
       return {
         wordarray: wordlist.split("\n"),
@@ -54,7 +54,6 @@
                   break
               }
           }
-
           if (match) {
               for (var i = 0; i < this.include.length; i++) {
                   if (!word.includes(this.include[i])) {
@@ -63,7 +62,6 @@
                   }
               }
           }
-              
           if (match) {
               for (var i = 0; i < this.exclude.length; i++) {
                   if (word.includes(this.exclude[i])) {
@@ -72,23 +70,26 @@
                   }
               }
           }
-
-          if (match && possiblewords.length < 5000) {
+          if (match) {
               possiblewords += word 
+          }
+          if (possiblewords.length > 5400) {
+              possiblewords += "..." 
+              break
           }
         }
         return (possiblewords);
       }
     }
   }
-  </script>
+</script>
 
 <style scoped>
-.letter {
-  width: 20px;
-}
-label {
-  display: inline-block;
-  width: 60px;
-}
+  label {
+    display: inline-block;
+    width: 60px;
+  }
+  .letter {
+    width: 20px;
+  }
 </style>
