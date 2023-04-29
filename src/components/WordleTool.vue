@@ -43,60 +43,43 @@
     },
     computed: {
       words() {
-        // return (wordlist);
-    // this.wordarray = this.wordlist.split(" ")
-    // this.wordarray[0] = "arraytest"
-        
         const positions = [this.l1, this.l2, this.l3, this.l4, this.l5]
         var possiblewords = ""
-        // possiblewords = "pwtest"
+        for (const word of this.wordarray){
+          var match = true
+          for (var i = 0; i < 5; i++) {
+              if (positions[i] == "") { continue }
+              if (word[i] != positions[i]) { 
+                  match = false
+                  break
+              }
+          }
 
+          if (match) {
+              for (var i = 0; i < this.include.length; i++) {
+                  if (!word.includes(this.include[i])) {
+                      match = false
+                      break
+                  }
+              }
+          }
+              
+          if (match) {
+              for (var i = 0; i < this.exclude.length; i++) {
+                  if (word.includes(this.exclude[i])) {
+                      match = false
+                      break
+                  }
+              }
+          }
 
-                for (const word of this.wordarray){
-                    var match = true
-                    for (var i = 0; i < 5; i++) {
-                        if (positions[i] == "") { continue }
-                        if (word[i] != positions[i]) { 
-                            match = false
-                            break
-                        }
-                    }
-
-                    if (match) {
-                        for (var i = 0; i < this.include.length; i++) {
-                            if (!word.includes(this.include[i])) {
-                                match = false
-                                break
-                            }
-                        }
-                    }
-                        
-                    if (match) {
-                        for (var i = 0; i < this.exclude.length; i++) {
-                            if (word.includes(this.exclude[i])) {
-                                match = false
-                                break
-                            }
-                        }
-                    }
-
-                    if (match && possiblewords.length < 5000) {
-                        possiblewords += word 
-                    }
-                }
-
-    //         if (word.includes("x")) {
-    //             possiblewords += word + word[0] + positions[0] +this.l1
-    // }                
-                // }
-
-                return (possiblewords);
-
-                // return (this.wordarray[1]);
+          if (match && possiblewords.length < 5000) {
+              possiblewords += word 
+          }
+        }
+        return (possiblewords);
       }
-    },
-
-
+    }
   }
   </script>
 
