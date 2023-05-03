@@ -71,7 +71,7 @@
               }
           }
           if (match) {
-              possiblewords += word 
+              possiblewords += word + " "
           }
           if (possiblewords.length > 5400) {
               possiblewords += "..." 
