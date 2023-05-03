@@ -4,7 +4,6 @@
 
 <template>
   <main>
-    <!-- <TheWelcome /> -->
     <WordleTool />
   </main>
 </template>
