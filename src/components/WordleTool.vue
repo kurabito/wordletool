@@ -1,5 +1,5 @@
 <template>
-  <h2>Wordle Tool</h2>
+  <h2>Wordle Help</h2>
   <div>
     <p>
       <input type="text" id="l1" v-model="l1" maxlength="1" class="letter">
