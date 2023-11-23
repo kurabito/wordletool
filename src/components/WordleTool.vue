@@ -2,6 +2,9 @@
   <h2>Wordle Help</h2>
   <div>
     <p>
+      <label for="l1">
+        Correct
+      </label>
       <input type="text" id="l1" v-model="l1" maxlength="1" class="letter">
       <input type="text" id="l2" v-model="l2" maxlength="1" class="letter">
       <input type="text" id="l3" v-model="l3" maxlength="1" class="letter">
@@ -9,11 +12,21 @@
       <input type="text" id="l5" v-model="l5" maxlength="1" class="letter">
     </p>
     <p>
+      <label for="m11">
+        Wrong place
+      </label>
+      <input type="text" id="m11" v-model="m11" maxlength="1" class="letter">
+      <input type="text" id="m12" v-model="m12" maxlength="1" class="letter">
+      <input type="text" id="m13" v-model="m13" maxlength="1" class="letter">
+      <input type="text" id="m14" v-model="m14" maxlength="1" class="letter">
+      <input type="text" id="m15" v-model="m15" maxlength="1" class="letter">
+    </p>
+    <!-- <p>
       <label for="include">
         Include
       </label>
       <input type="text" id="include" v-model="include">
-    </p>
+    </p> -->
     <p><label for="exclude">
         Exclude
       </label>
@@ -37,38 +50,61 @@
         l3: "",
         l4: "",
         l5: "",
-        include: "",
+        m11: "",
+        m12: "",
+        m13: "",
+        m14: "",
+        m15: "",
+        // include: "",
         exclude: "",
       }
     },
     computed: {
       words() {
-        const positions = [this.l1, this.l2, this.l3, this.l4, this.l5]
+        const correct = [this.l1, this.l2, this.l3, this.l4, this.l5]
+        const misplaced1 = [this.m11, this.m12, this.m13, this.m14, this.m15]
         var possiblewords = ""
         for (const word of this.wordarray){
           var match = true
           for (var i = 0; i < 5; i++) {
-              if (positions[i] == "") { continue }
-              if (word[i] != positions[i]) { 
+              if (correct[i] == "") { continue }
+              // Throw out words that don't have known letters in the known correct position
+              if (word[i] != correct[i]) { 
                   match = false
                   break
               }
           }
           if (match) {
-              for (var i = 0; i < this.include.length; i++) {
-                  if (!word.includes(this.include[i])) {
-                      match = false
-                      break
-                  }
-              }
+            for (var i = 0; i < 5; i++) {
+                if (misplaced1[i] == "") { continue }
+                // Throw out words that have known letters in a known incorrect position
+                if (word[i] == misplaced1[i]) { 
+                    match = false
+                    break
+                }
+                // Throw out words that don't contain a known letter in an unknown position
+                if (!word.includes(misplaced1[i])) { 
+                    match = false
+                    break
+                }
+            }
           }
+          // if (match) {
+          //     for (var i = 0; i < this.include.length; i++) {
+          //         if (!word.includes(this.include[i])) {
+          //             match = false
+          //             break
+          //         }
+          //     }
+          // }
           if (match) {
-              for (var i = 0; i < this.exclude.length; i++) {
-                  if (word.includes(this.exclude[i])) {
-                      match = false
-                      break
-                  }
-              }
+            // Throw out words that contain letters known to be not included
+            for (var i = 0; i < this.exclude.length; i++) {
+                if (word.includes(this.exclude[i])) {
+                    match = false
+                    break
+                }
+            }
           }
           if (match) {
               possiblewords += word + " "
@@ -87,7 +123,7 @@
 <style scoped>
   label {
     display: inline-block;
-    width: 60px;
+    width: 100px;
   }
   .letter {
     width: 20px;
