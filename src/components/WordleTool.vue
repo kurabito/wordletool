@@ -21,12 +21,16 @@
       <input type="text" id="m14" v-model="m14" maxlength="1" class="letter">
       <input type="text" id="m15" v-model="m15" maxlength="1" class="letter">
     </p>
-    <!-- <p>
-      <label for="include">
-        Include
+    <p>
+      <label for="m21">
+        Wrong place
       </label>
-      <input type="text" id="include" v-model="include">
-    </p> -->
+      <input type="text" id="m21" v-model="m21" maxlength="1" class="letter">
+      <input type="text" id="m22" v-model="m22" maxlength="1" class="letter">
+      <input type="text" id="m23" v-model="m23" maxlength="1" class="letter">
+      <input type="text" id="m24" v-model="m24" maxlength="1" class="letter">
+      <input type="text" id="m25" v-model="m25" maxlength="1" class="letter">
+    </p>
     <p><label for="exclude">
         Exclude
       </label>
@@ -55,7 +59,11 @@
         m13: "",
         m14: "",
         m15: "",
-        // include: "",
+        m21: "",
+        m22: "",
+        m23: "",
+        m24: "",
+        m25: "",
         exclude: "",
       }
     },
@@ -63,6 +71,7 @@
       words() {
         const correct = [this.l1, this.l2, this.l3, this.l4, this.l5]
         const misplaced1 = [this.m11, this.m12, this.m13, this.m14, this.m15]
+        const misplaced2 = [this.m21, this.m22, this.m23, this.m24, this.m25]
         var possiblewords = ""
         for (const word of this.wordarray){
           var match = true
@@ -76,14 +85,22 @@
           }
           if (match) {
             for (var i = 0; i < 5; i++) {
-                if (misplaced1[i] == "") { continue }
+                // if (misplaced1[i] == "") { continue }
                 // Throw out words that have known letters in a known incorrect position
                 if (word[i] == misplaced1[i]) { 
                     match = false
                     break
                 }
+                if (word[i] == misplaced2[i]) { 
+                    match = false
+                    break
+                }
                 // Throw out words that don't contain a known letter in an unknown position
                 if (!word.includes(misplaced1[i])) { 
+                    match = false
+                    break
+                }
+                if (!word.includes(misplaced2[i])) { 
                     match = false
                     break
                 }
