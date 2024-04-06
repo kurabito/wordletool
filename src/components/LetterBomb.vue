@@ -37,7 +37,7 @@
             if (match) {
                 possiblewords += word + " "
             }
-            if (possiblewords.length > 2000) {
+            if (possiblewords.length > 1800) {
                 possiblewords += "..." 
                 break
             }
