@@ -126,9 +126,10 @@
           if (match) {
               possiblewords += word + " "
           }
-          if (possiblewords.length > 5400) {
-              possiblewords += "..." 
-              break
+          // if (possiblewords.length > 5400) {
+          if (possiblewords.length > 2000) {
+            possiblewords += "..." 
+            break
           }
         }
         return (possiblewords);
